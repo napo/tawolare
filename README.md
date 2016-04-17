@@ -38,6 +38,14 @@ python tawolare.py
 e aprire un browser all'indirizzo http://127.0.0.1:8515
 
 ## installazione su un server
+l'applicazione può essere installata su un server pubblico attraverso il modulo WSGI di Apache.<br
+Sono forniti i file:
+- catasto.conf
+- adapter.wsgi
+come titolo di esempio
+
+# Ulteriori librerie utili
+
 
 # web API
 l'applicazione, messa in produzione, offre una serie di API per permettere quindi operazioni come script, nuove interfacce o integrazioni con strumenti come [Open Refine](http://openrefine.org/)
