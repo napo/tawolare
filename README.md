@@ -43,16 +43,12 @@ e aprire un browser all'indirizzo http://127.0.0.1:8515
 l'applicazione, messa in produzione, offre una serie di API per permettere quindi operazioni come script, nuove interfacce o integrazioni con strumenti come [Open Refine](http://openrefine.org/)
 Le API restituiscono geojson
 
-| API        | Name           | Metodo  |
+| API        | Descrizione           | Metodo  |
 | ------------- |:-------------:| -----:|
-| http://servername/api/particella/latitudine/longitudine
-     | informazioni particella da lat/long | get |
-     
-http://servername/api/particella/latitudine/longitudine
-http://servername/api/particella/id
-http://servername/api/comune/amministrativo/latitudine/longitudine
-http://servername/api/comune/amministrativo/id
-http://servername/api/comune/catastale/id
-http://servername/api/upload
-
+| http://servername/api/particella/*latitudine*/*longitudine* | informazioni particella da lat/long | get |
+| http://servername/api/comune/catastale/*latitudine*/*longitudine* | informazioni comune catastale da lat/long | get |
+| http://servername/api/comune/catastale/*id*| informazioni comune catastale da identificativo univoco | get |
+| http://servername/api/comune/amministrativo/*latitudine*/*longitudine* | informazioni comune amministrativo da lat/long | get |
+| http://servername/api/comune/amministrativo/*id*| informazioni comune amministrativo da identificativo univoco | get |
+| http://servername/api/upload| informazioni particella da foto con geotag | post |
 
