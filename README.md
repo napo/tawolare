@@ -58,8 +58,8 @@ Le API restituiscono [geojson](http://geojson.org/)<br/>
 | http://servername/api/upload| informazioni particella da foto con geotag - l'immagine va inviata con la variabile *filename* | POST |
 
 # ulteriori librerie utili
-- gpsphoto
-si tratta di una classe python che recupera, in formato geojson, le informazioni geografiche contenute in una foto<br/>
+## gpsphoto.py
+classe python che recupera, in formato geojson, le informazioni geografiche contenute in una foto<br/>
 Es.
 ```python
 from gpsphoto import Photo
@@ -81,4 +81,14 @@ output
 	},
 	"type": "Feature"
 }
+```
+## catastodb.py
+classe python attraverso cui interrogare il file sqlite usato dall'applicazione
+Es.
+```python
+form catastodb import Catasto
+catasto = Catasto()
+print catasto.findLandParcel(46.0910463043362,11.118695139884947)
+```
+
 ```
