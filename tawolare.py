@@ -32,29 +32,34 @@ app.config['autojson'] = True
 def serverInfo():
     servername = request.environ.get('SERVER_NAME')
     port =  request.environ.get('SERVER_PORT')
-    if port != 80:
-        servername += ":" + str(port)
+    scriptname = request.script_name
+    if scriptname == "/":
+        scriptname = ""
+    if port != "80":
+        port = ":" + str(port)
+    servername = "http://" + servername +port + scriptname 
     return servername
 
 @app.route('/www/<filepath:path>')
 def server_static(filepath):
-    return static_file(filepath, root='www/')
+    return static_file(filepath, root= './www/')
     
 @app.route('/api')
 @view('api.tpl')
 def apidesc():
     try:
-        return {"servername": serverInfo()}
+        return {"servername": serverInfo() }
     except Exception as e:
         print(e)
     
-@app.route('/api/showip')
+@app.route('/showip')
 def show_ip():
     ip = request.environ.get('REMOTE_ADDR')
     return template("Your IP is: {{ip}}", ip=ip)
 
 @app.route('/api/particella/<y>/<x>')
 def particella(x,y):
+    print request.script_name
     try:
         catasto = Catasto()
         landParcel = catasto.findLandParcel(x,y)  
@@ -159,5 +164,5 @@ def test():
 
 if __name__ == '__main__':
 #    app.run(host='0.0.0.0', port=8515, debug=True,reloader=True,server=FlupFCGIServer)
-    app.run(host='0.0.0.0', port=8515, debug=True,reloader=True,server="paste")
+    app.run(host='0.0.0.0', port=8515, debug=True,reloader=True)
 

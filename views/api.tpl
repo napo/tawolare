@@ -12,7 +12,7 @@
     <div class="tab-pane active" id="api1">
     <h2>particella da latitudine e longitudine</h2>
     <h3>endpoint</h3>
-    <div class="well well-sm"><span style="font-family: courier">http://{{servername}}/api/particella/<em>latitudine</em>/<em>longitudine</em></span></div>
+    <div class="well well-sm"><span style="font-family: courier">{{servername}}/api/particella/<em>latitudine</em>/<em>longitudine</em></span></div>
     <p>
     restituisce un geojson con particella catastale che contiene il punto espresso il latitudine e longitudine (WGS84).<br/>
 Il geojson contiene la poligonale della particella e i seguenti attributi:
@@ -62,7 +62,7 @@ Il geojson contiene la poligonale della particella e i seguenti attributi:
      <div class="tab-pane" id="api2">
         <h2>comune catastale da latitudine e longitudine</h2>
         <h3>endpoint</h3>
-        <div class="well well-sm"><span style="font-family: courier">http://{{servername}}/api/comune/catastale/<em>latitudine</em>/<em>longitudine</em></span></div>
+        <div class="well well-sm"><span style="font-family: courier">{{servername}}/api/comune/catastale/<em>latitudine</em>/<em>longitudine</em></span></div>
         <p>
         restituisce un geojson con i dati sul comune catastale che contiene il punto espresso il latitudine e longitudine (WGS84).<br/>
     Il geojson contiene la poligonale del confine catastale, il nome del comune catastale (<em>comune_catastale</em>, l'identificativo univoco catastale (<em>id_catastale</em>) e la distanza dal punto (<em>distanza_da_punto</em>).
@@ -73,7 +73,7 @@ Il geojson contiene la poligonale della particella e i seguenti attributi:
         <div class="tab-pane" id="api3">
         <h2>comune amministrativo da latitudine e longitudine</h2>
         <h3>endpoint</h3>
-        <div class="well well-sm"><span style="font-family: courier">http://{{servername}}/api/comune/amministrativo/<em>latitudine</em>/<em>longitudine</em></span></div>
+        <div class="well well-sm"><span style="font-family: courier">{{servername}}/api/comune/amministrativo/<em>latitudine</em>/<em>longitudine</em></span></div>
         <p>
         restituisce un geojson con il comune amministrativo che contiene il punto espresso il latitudine e longitudine (WGS84).<br/>
     Il geojson contiene la poligonale del confine amministrativo, il nome del comune amministrativo (<em>comune_catastale</em>, l'identificativo univoco amministrativo (<em>id_amministrativo</em>) e la distanza dal punto (<em>distanza_da_punto</em>).

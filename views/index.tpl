@@ -10,7 +10,7 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Tawolare</a>
+            <a class="navbar-brand">Catasto Fondiario Trentino</a>
           </div>
 
         <div class="navbar-collapse collapse">

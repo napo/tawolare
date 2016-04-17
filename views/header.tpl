@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="www/L.Control.Locate.min.css"/>
     <link rel="stylesheet" href="www/css/l.geosearch.css"/>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">    
+    <link rel="stylesheet" href="www/easy-button.css"/>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>

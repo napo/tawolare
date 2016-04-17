@@ -9,7 +9,8 @@
     <script src="www/js/l.geosearch.provider.openstreetmap.js"></script>
     <script src="www/js/leaflet-hash.js"></script>
     <script src="www/L.Control.Locate.min.js"></script>
-    <script src="www/js/exif.js"></script>
+    <script src="www/easy-button.js"></script> 
+   <!-- <script src="www/js/exif.js"></script> -->
 <script src="www/js/trentino.js"></script>
 <script src="www/js/map.js"></script>
     <style>

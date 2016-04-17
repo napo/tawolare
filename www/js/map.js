@@ -54,10 +54,10 @@ function popUp(f,l){
                 }
 
                 message += '<tr>';
-                message += '<td>area:</td><td>'+ f.properties["area"]  + '</td>';
+                message += '<td>area:</td><td>'+ Math.round(f.properties["area"]).toLocaleString()  + ' mq</td>';
                 message += '</tr>';
                 message += '<tr>';
-                message += '<td>perimetro:</td><td>'+ f.properties["perimeter"]  + '</td>';
+                message += '<td>perimetro:</td><td>'+ Math.round(f.properties["perimeter"]).toLocaleString()  + ' m</td>';
                 message += '</tr>';
                 message += '<tr>';
                 message += '<td>ctwexpr:</td><td>'+ f.properties["ctwexpr"]  + '</td>';
@@ -225,6 +225,12 @@ function main() {
         retainZoomLevel: false,
         
     }).addTo(map);
+var helloPopup = L.popup().setContent('Hello World!');
+
+L.easyButton('fa-globe', function(btn, map){
+    helloPopup.setLatLng(map.getCenter()).openOn(map);
+}).addTo(map); // probably just `map`
+
 }
 
 
