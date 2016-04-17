@@ -48,15 +48,15 @@ come titolo di esempio
 
 
 # web API
-l'applicazione, messa in produzione, offre una serie di API per permettere quindi operazioni come script, nuove interfacce o integrazioni con strumenti come [Open Refine](http://openrefine.org/)
-Le API restituiscono geojson
+l'applicazione, messa in produzione, offre una serie di API per permettere quindi operazioni come script, nuove interfacce o integrazioni con strumenti come [Open Refine](http://openrefine.org/)<br/>
+Le API restituiscono [geojson](http://geojson.org/)<br/>
 
 | API        | Descrizione           | Metodo  |
 | ------------- |:-------------:| -----:|
-| http://servername/api/particella/*latitudine*/*longitudine* | informazioni particella da lat/long | get |
-| http://servername/api/comune/catastale/*latitudine*/*longitudine* | informazioni comune catastale da lat/long | get |
-| http://servername/api/comune/catastale/*id*| informazioni comune catastale da identificativo univoco | get |
-| http://servername/api/comune/amministrativo/*latitudine*/*longitudine* | informazioni comune amministrativo da lat/long | get |
-| http://servername/api/comune/amministrativo/*id*| informazioni comune amministrativo da identificativo univoco | get |
-| http://servername/api/upload| informazioni particella da foto con geotag | post |
+| http://servername/api/particella/*latitudine*/*longitudine* | informazioni particella da latitudine e longitudine espresse in WGS84 | GET |
+| http://servername/api/comune/catastale/*latitudine*/*longitudine* | informazioni comune catastale da latitudine e longitudine espresse in WGS84 | GET |
+| http://servername/api/comune/catastale/*id*| informazioni comune catastale da identificativo univoco | GET |
+| http://servername/api/comune/amministrativo/*latitudine*/*longitudine* | informazioni comune amministrativo latitudine e longitudine espresse in WGS84 | GET |
+| http://servername/api/comune/amministrativo/*id*| informazioni comune amministrativo da identificativo univoco | GET |
+| http://servername/api/upload| informazioni particella da foto con geotag - l'immagine va inviata con la variabile *filename* | POST |
 
