@@ -44,9 +44,6 @@ Sono forniti i file:
 - adapter.wsgi
 come titolo di esempio
 
-# Ulteriori librerie utili
-
-
 # web API
 l'applicazione, messa in produzione, offre una serie di API per permettere quindi operazioni come script, nuove interfacce o integrazioni con strumenti come [Open Refine](http://openrefine.org/)<br/>
 Le API restituiscono [geojson](http://geojson.org/)<br/>
@@ -60,3 +57,28 @@ Le API restituiscono [geojson](http://geojson.org/)<br/>
 | http://servername/api/comune/amministrativo/*id*| informazioni comune amministrativo da identificativo univoco | GET |
 | http://servername/api/upload| informazioni particella da foto con geotag - l'immagine va inviata con la variabile *filename* | POST |
 
+# ulteriori librerie utili
+- gpsphoto
+si tratta di una classe python che recupera, in formato geojson, le informazioni geografiche contenute in una foto<br/>
+Es.
+```python
+from gpsphoto import Photo
+foto = Photo('esempi/trento.jpg')
+print foto.getGeoJSON()
+```
+output
+```json
+{
+	"geometry": {
+		"coordinates": [11.125277777777779, 46.07194444444445],
+		"type": "Point"
+	},
+	"id": 0,
+	"properties": {
+		"altitudine": "270",
+		"img": "thumb_trento.jpg",
+		"timestamp": "2016:03:23 08:24:20"
+	},
+	"type": "Feature"
+}
+```
