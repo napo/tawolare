@@ -82,17 +82,31 @@ Il geojson contiene la poligonale della particella e i seguenti attributi:
 <div class="well well-sm"><span style="font-family: courier"><a target="_new" href="{{servername}}/api/comune/amministrativo/46.0910463043362/11.118695139884947">{{servername}}/api/comune/amministrativo/46.0910463043362/11.118695139884947</a></div>
         </div>
         <div class="tab-pane" id="api4">
-            <h1>Green</h1>
-            <p>green green green green green</p>
-        </div>
+	<h2>comune catastale da codice univoco</h2>  
+  	<h3>endpoint</h3>
+        <div class="well well-sm"><span style="font-family: courier">{{servername}}/api/comune/catastale/<em>id</em></span></div>
+	<p>restistuisce un geojson con il comune catastale corrispondente al codice catastale univoco</p>
+	<h3>esempio</h3>
+	<div class="well well-sm"><span style="font-family: courier"><a target="_new" href="{{servername}}/api/comune/catastale/116">{servername}}/api/comune/catastale/116</a></div>
+	</div>
         <div class="tab-pane" id="api5">
-            <h1>Blue</h1>
-            <p>blue blue blue blue blue</p>
+	<h2>comune amministrativo da codice univoco</h2>
+        <h3>endpoint</h3>
+        <div class="well well-sm"><span style="font-family: courier">{{servername}}/api/comune/catastale/<em>id</em></span></div>
+        <p>restistuisce un geojson con il comune amministrativo corrispondente al codice amministrativo univoco</p>
+        <h3>esempio</h3>
+        <div class="well well-sm"><span style="font-family: courier"><a target="_new" href="{{servername}}/api/comune/amministrativo/116">{servername}}/api/comune/amministrativo/116</a></div>
         </div>
+        
+	</div>
         <div class="tab-pane" id="api6">
-            <h1>Blue</h1>
-            <p>blue blue blue blue blue</p>
-        </div>
+            <h2>particella catastale da foto con geotag</h2>
+            <h3>endpoint</h3>
+  	    <div class="well well-sm"><span style="font-family: courier">{{servername}}/api/upload/</span></div>
+	    <p>
+	    il metodo funziona solo in POST e va inviato il file associandolo alla variabile <em>filename</em>
+	    </p>
+	</div>
     </div>
 </div>
 

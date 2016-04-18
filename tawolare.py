@@ -29,14 +29,16 @@ import json
 app =Bottle()
 app.config['autojson'] = True
 
+@app.route('/serverinfo')
 def serverInfo():
     servername = request.environ.get('SERVER_NAME')
     port =  request.environ.get('SERVER_PORT')
     scriptname = request.script_name
-    if scriptname == "/":
-        scriptname = ""
+    scriptname.strip("/")
     if port != "80":
-        port = ":" + str(port)
+        port = ":" + port 
+    else:
+	port = ""
     servername = "http://" + servername +port + scriptname 
     return servername
 
