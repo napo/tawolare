@@ -88,6 +88,8 @@ def namecadastry(id):
     'id_amministrativo':name[0][1],
     'comune_amministrativo': amm[0][0],
     'comune_catastale': name[0][0],
+    'centroidX': name[0][2],
+    'centroidY': name[0][3],
     'id_comune_catastale':id}
     return json.dumps(d)
 

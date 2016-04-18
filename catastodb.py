@@ -56,13 +56,13 @@ class Catasto():
     def aroundPoint(self,table,id,label,x,y,distance=100):
         point = self.sqlPoint(x,y)
         circle = 'buffer(%s,%s)' % (point,distance)       
-        sql = """select %s, %s, ST_Intersects(Geometry,%s) as touch from %s where touch == 1""" % (id,label,circle,table)
+        sql = """select %s, %s, ST_Intersects(Geometry,%s) as touch, X(transform(centroid(geometry),4326)) as centroidX, Y(transform(centroid(geometry),4326)) as centroidY from %s where touch == 1""" % (id,label,circle,table)
         data = self.cur.execute(sql).fetchall()
         return data
         
     def touch(self,table,id,label,x,y):
         point = self.sqlPoint(x,y)
-        sql = """select %s,%s,ST_Intersects(Geometry,%s) as touch from %s where touch == 1""" % (id,label,point,table)
+        sql = """select %s,%s,ST_Intersects(Geometry,%s) as touch, X(transform(centroid(geometry),4326)) as centroidX, Y(transform(centroid(geometry),4326)) as centroidY from %s where touch == 1""" % (id,label,point,table)
         data = self.cur.execute(sql).fetchall()
         return data        
     
@@ -76,7 +76,7 @@ class Catasto():
         if len(ids) == 1:
             sids = "(%s)" % ids[0]
             ids = sids
-        sql = 'select %s,%s,st_distance(%s,geometry) as distance, asWkt(st_transform(Geometry,4326)) as geometry from %s where %s in %s' % (id,label,point,table,id,ids)
+        sql = 'select %s,%s,st_distance(%s,geometry) as distance, asWkt(st_transform(Geometry,4326)) as geometry, X(transform(centroid(geometry),4326)) as centroidX, Y(transform(centroid(geometry),4326)) as centroidY from %s where %s in %s' % (id,label,point,table,id,ids)
         data = self.cur.execute(sql).fetchall()
         return data
     
@@ -89,6 +89,8 @@ class Catasto():
             town['name']= data[1].lower()
             town['distance'] = data[2]
             town['geometry']= data[3]
+	    town['centroidX'] = data[4]
+	    town['centroidY'] = data[5]
             towns.append(town)
         towns = sorted(towns, key=lambda k:k['distance'])
         return towns
@@ -104,6 +106,8 @@ class Catasto():
                 properties['id_comune'] =  data['id']
                 properties['comune_amministrativo'] = data['name']
                 properties['distanza_da_punto'] = data['distance']
+		properties['centroidX'] = data['centroidX']
+		properties['centroidY'] = data['centroidY']
                 geometry = shapely.wkt.loads(data['geometry'])
                 parcel = geojson.Feature(geometry=geometry, id=idgeom,properties=properties)
                 idgeom += 1
@@ -132,6 +136,8 @@ class Catasto():
             cadastry['name']= data[1].lower()
             cadastry['distance'] = data[2]
             cadastry['geometry']= data[3]
+            cadastry['centroidX']= data[4]
+            cadastry['centroidY']= data[5]
             cadastries.append(cadastry)
         cadastries = sorted(cadastries, key=lambda k:k["distance"])
         return cadastries      
@@ -147,6 +153,8 @@ class Catasto():
                 properties['id_catastale'] =  data['id']
                 properties['comune_catastale'] = data['name']
                 properties['distanza_da_punto'] = data['distance']
+                properties['centroidX'] = data['centroidX']
+                properties['centroidY'] = data['centroidY']
                 geometry = shapely.wkt.loads(data['geometry'])
                 parcel = geojson.Feature(geometry=geometry, id=idgeom,properties=properties)
                 idgeom += 1
@@ -165,24 +173,25 @@ class Catasto():
         return ids
 
     def dataCadastryTownship(self,ccat):
-        sql = 'select %s,%s, asWkt(st_transform(Geometry,4326)) as geometry from %s where %s=%s' % (self.ammcat_label,self.ammcom_id,self.ammcat,self.ammcat_id,ccat)
+        sql = 'select %s,%s, asWkt(st_transform(Geometry,4326)) as geometry, X(transform(centroid(geometry),4326)) as centroidX, Y(transform(centroid(geometry),4326)) as centroidY from %s where %s=%s' % (self.ammcat_label,self.ammcom_id,self.ammcat,self.ammcat_id,ccat)
         results = self.cur.execute(sql).fetchall()
         return results
 
     def nameTownship(self,comu):
-        sql = 'select %s,asWkt(st_transform(Geometry,4326)) as geometry from %s where %s=%s' % (self.ammcom_label,self.ammcom,self.ammcom_id,comu)
+        sql = 'select %s,asWkt(st_transform(Geometry,4326)) as geometry, X(transform(centroid(geometry),4326)) as centroidX, Y(transform(centroid(geometry),4326)) as centroidY from %s where %s=%s' % (self.ammcom_label,self.ammcom,self.ammcom_id,comu)
         results = self.cur.execute(sql).fetchall()
         return results   
         
     def nameGeoTowhship(self,comu):
         town = self.nameTownship(comu)
-        print town
         idgeom = 0
         d = []
         geotowns = []
         properties = {}
         properties['id_comune'] =  comu
         properties['comune_amministrativo'] = town[0][0]
+        properties['centroidX'] = town[0][2] 
+	properties['centroidY'] = town[0][3]
         geometry = shapely.wkt.loads(town[0][1])
         geometry = geojson.Feature(geometry=geometry, id=idgeom,properties=properties)
         geotowns.append(geometry)
