@@ -22,7 +22,7 @@
         </div>
       </div>
     </div>
-    <div id="container">
+   <div id="container">
         <div id="uploadphoto" class="modal fade" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">

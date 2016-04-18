@@ -1,5 +1,6 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="www/js/bootstrap.min.js"></script>
+    <script src="www/js/bootstrap-typeahead.min.js" type="text/javascript"></script>
     <script src="www/js/plugins/canvas-to-blob.min.js" type="text/javascript"></script>
     <script src="www/js/fileinput.min.js" type="text/javascript"></script>
     <script src="www/js/fileinput_locale_it.js" type="text/javascript"></script>
@@ -13,7 +14,6 @@
    <!-- <script src="www/js/exif.js"></script> -->
 <script src="www/js/trentino.js"></script>
 <script src="www/js/map.js"></script>
-<!--<script src="www/js/googleanalytics.js"></script>-->
     <style>
 html, body, #container {
   height: 100%;
@@ -80,6 +80,32 @@ body {
       </div>
     </div>
   </div>
+</div>
+<div>
+        <div id="findlandparcel" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Localizza un particella catastale dal suo numero</h4>
+                    </div>
+                    <div class="modal-body">
+                     <form role="form" id="formparcel">
+                      <div class="form-group">
+                        <label for="cadastries">nome o codice comune catastale:</label>
+                         <input id="cadastries" type="text" placeholder="nome o codice comune catastale..." class="form-control">
+                      </div>
+                      <div class="form-group">
+                        <label for="numparcel">numero particella catastale:</label>
+                        <input id="numparcel" type="text" placeholder="numero particella catastale..." class="form-control">
+                      </div>
+                      <button type="submit" class="btn btn-default">cerca</button>
+                    </form>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Chiudi</button>
+                  </div>
+            </div>
+        </div>
 </div>
   </body>
 </html>

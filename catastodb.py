@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+from builtins import str
 #import sqlite3
 from pysqlite2 import dbapi2 as sqlite3
 import geojson
@@ -172,6 +173,17 @@ class Catasto():
             ids.append(iddu)
         return ids
 
+    def listCadastryTownships(self):
+        sql = 'select distinct(%s) as id, lower(%s) as comune from %s order by %s' % (self.ammcat_id,self.ammcat_label,self.ammcat,self.ammcat_label)
+        results = self.cur.execute(sql).fetchall()
+        data = []
+        for r in results:
+            values = {}
+            values['name'] = str(r[0]) + " - " + str(r[1]).capitalize()
+            values['id'] = r[0]
+            data.append(values)
+        return data
+        
     def dataCadastryTownship(self,ccat):
         sql = 'select %s,%s, asWkt(st_transform(Geometry,4326)) as geometry, X(transform(centroid(geometry),4326)) as centroidX, Y(transform(centroid(geometry),4326)) as centroidY from %s where %s=%s' % (self.ammcat_label,self.ammcom_id,self.ammcat,self.ammcat_id,ccat)
         results = self.cur.execute(sql).fetchall()
@@ -232,4 +244,36 @@ class Catasto():
                     parcels.append(parcel)
         return parcels
 
+    def findLandParcelbyId(self,num,codcc):
+        idgeom = 0
+        idcat = str(codcc).zfill(3)
+        ccat = "%s%s" % (idcat,self.ext_tablecadastry)
+        parcels = []
+        sql = 'select codcc, num, dsup_sopra, dsup_sotto, fab, aswkt(transform(geometry,4326)) as wkt, ctwexpr_ as ctwexpr, ctwexpr_id, tipop,  area, perimeter, X(transform(centroid(geometry),4326)) as centroidX, Y(transform(centroid(geometry),4326)) as centroidY  from `%s` where num = "%s"' % (ccat,num)
+        fparcels = self.cur.execute(sql).fetchall()
+        if len(fparcels) > 0:
+            for fparcel in fparcels:
+                properties = {}
+                properties['codcc'] = fparcel[0]
+                properties['num']= fparcel[1]
+                properties['dsup_sopra']= fparcel[2]
+                properties['dsup_sotto']= fparcel[3]
+                properties['fab']=fparcel[4]
+                properties['ctwexpr']=fparcel[6]
+                properties['ctwexpr_id']=fparcel[7]
+                properties['tipop']=fparcel[8]
+                properties['area']=fparcel[9]
+                properties['perimeter']=fparcel[10]  
+                properties['centroidX']=fparcel[11]
+                properties['centroidY']=fparcel[12]
+                dcat = self.dataCadastryTownship(fparcel[0])
+                properties['dcat'] = dcat[0][0]
+                properties['comu'] = dcat[0][1]
+                namecomu = self.nameTownship(dcat[0][1])[0][0]
+                properties['comune'] = namecomu
+                geometry = shapely.wkt.loads(fparcel[5])
+                parcel = geojson.Feature(geometry=geometry, id=idgeom,properties=properties)
+                idgeom += 1
+                parcels.append(parcel)
+        return parcels
 

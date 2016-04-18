@@ -68,6 +68,17 @@ def particella(x,y):
     except Exception as e:
         return e
 
+@app.route('/api/trovaparticella')
+def trovaparticella():
+    try:
+        ccat = request.query['idcomune']
+        num = request.query['numparticella']
+        catasto = Catasto()
+        result = catasto.findLandParcelbyId(num,ccat)
+        return catasto.joinGeoJSON(result)
+    except Exception as e:
+        return e
+
 @app.route('/api/comune/amministrativo/<id>')
 def nametownship(id):
     catasto = Catasto()
@@ -107,6 +118,12 @@ def error404(error):
     except Exception as e:
         return e
 
+
+@app.route('/api/comune/catastale/lista',method='GET')
+def getCadastryTownships():
+    catasto = Catasto()
+    cadastries = catasto.listCadastryTownships()
+    return json.dumps(cadastries)
 
 @app.route('/api/upload', method='POST')
 def do_upload():

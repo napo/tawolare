@@ -81,7 +81,6 @@ formupload.on('fileuploaded', function(event, data, previewId, index) {
     photogeojson = L.geoJson(null,{onEachFeature:popUp,pointToLayer:drawCircle}).addTo(map);
     $('#uploadphoto').hide();
     $('.modal-backdrop').hide();
-    giacomo = response;
     try {
         if (response.features.length > 0) {
             if (lastphotoLayer != null) {
@@ -100,17 +99,18 @@ formupload.on('fileuploaded', function(event, data, previewId, index) {
 });
 
 
-	function drawCircle (feature, latlng) {
-		cerchio = L.circleMarker(latlng, {
-			radius: 4,
-			fillColor: "#ff7800",
-			color: "#000",
-			weight: 1,
-			opacity: 1,
-			fillOpacity: 0.8
-		});
-       return cerchio;
-     }
+
+function drawCircle (feature, latlng) {
+	cerchio = L.circleMarker(latlng, {
+		radius: 4,
+		fillColor: "#ff7800",
+		color: "#000",
+		weight: 1,
+		opacity: 1,
+		fillOpacity: 0.8
+	});
+   return cerchio;
+ }
 
 function main() {
 	var arcgisurl = 'http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
@@ -132,10 +132,10 @@ function main() {
 
         var wmfmap = new L.TileLayer(wmfurl, {attribution: wmfattrib});
         var hotosm = new L.TileLayer(hotosmurl, {attribution: hotosmattrib});
-	var mapboxsatellite = new L.TileLayer(mbsatelliteurl, {attribution: mbsatelliteattrib});
-	var maparcgis = new L.TileLayer(arcgisurl, {attribution: arcgisattrib});
-	var mapbox = new L.TileLayer(mapboxUrl, {attribution: mapboxAttrib});
-	var trento = new L.LatLng(46.0725015,11.1194647); 
+	    var mapboxsatellite = new L.TileLayer(mbsatelliteurl, {attribution: mbsatelliteattrib});
+	    var maparcgis = new L.TileLayer(arcgisurl, {attribution: arcgisattrib});
+	    var mapbox = new L.TileLayer(mapboxUrl, {attribution: mapboxAttrib});
+	    var trento = new L.LatLng(46.0725015,11.1194647); 
         var labelurl = "http://{s}.tile.stamen.com/toner-labels/{z}/{x}/{y}.png"
         var labelattrib = 'label by <a href="http://stamen.com/">Stamen</a> based on <a href="http://www.openstreetmap.org">OpenStreetMap</a> data'
         var labelmap = new L.TileLayer(labelurl, {attribution: labelattrib});
@@ -178,6 +178,7 @@ function main() {
 
 
     var geojsonLayer = L.geoJson(null,{onEachFeature:popUp}).addTo(map);
+
     photogeojson = L.geoJson(null,{onEachFeature:popUp,pointToLayer:drawCircle}).addTo(map); 
    
     function onMapClick(e) {
@@ -190,7 +191,7 @@ function main() {
         	}	
         	catch(err) {}
          		document.getElementById('map').style.cursor = 'progress';
-			var geojsonLayer = L.geoJson(null,{onEachFeature:popUp}).addTo(map);
+			    var geojsonLayer = L.geoJson(null,{onEachFeature:popUp}).addTo(map);
          		geojsonLayer.fire('data:loading');
          		$.getJSON("api/particella/"+lat+"/"+lon, function (data) {
                 	geojsonLayer.fire('data:loaded');
@@ -224,29 +225,79 @@ function main() {
         
     }).addTo(map);
 
-var toggle = L.easyButton({
-  states: [{
-    stateName: 'interroga',
-    icon: 'fa-info',
-    title: 'selezioando questa icona i clic sulla mappa serviranno ad interrogare le particelle catastali',
-    onClick: function(control) {
-	viewparcel = 1	
-	control.state('fine');
-	console.log('quiiii');
-    }
-  }, {
-    icon: 'fa-info-circle',
-    stateName: 'fine',
-    onClick: function(control) {
-	viewparcel = 0	
-	control.state('interroga');
-    },
-    title: 'smetti di interrogare le particelle catastali '
-  }]
-});
-toggle.addTo(map);
+    var landparcel = L.easyButton('fa-binoculars', function(btn, map){
+	    $('#findlandparcel').modal('show')
+    }).addTo(map);
+
+
+    var toggle = L.easyButton({
+      states: [{
+        stateName: 'interroga',
+        icon: 'fa-info',
+        title: 'selezioando questa icona i clic sulla mappa serviranno ad interrogare le particelle catastali',
+        onClick: function(control) {
+	    viewparcel = 1	
+	    control.state('fine');
+        }
+      }, {
+        icon: 'fa-info-circle',
+        stateName: 'fine',
+        onClick: function(control) {
+	    viewparcel = 0	
+	    control.state('interroga');
+        },
+        title: 'smetti di interrogare le particelle catastali '
+      }]
+    });
+    toggle.addTo(map);
+
+    $('#cadastries').typeahead({
+            ajax: '/api/comune/catastale/lista',
+            display: 'nome',
+            val: 'id'
+    }); 
+
+  $("#formparcel").submit(function(e){
+                idcomune = $('#cadastries').val().split(" -")[0];
+                numparticella = $('#numparcel').val();
+                var formdata = {};
+                formdata["idcomune"] = idcomune;
+                formdata["numparticella"] = numparticella;
+                var urlapi = "/api/trovaparticella";
+                $.ajax({
+                    type: "get",
+                    url: urlapi,
+                    data: formdata,
+                    success: function(data){
+                            var geojsonLayer2 = L.geoJson(null,{onEachFeature:popUp}).addTo(map);
+                            $('#findlandparcel').modal('hide');
+                            //$('.modal-backdrop').hide();
+                        	try {
+                         	   	map.removeLayer(lastgeojsonLayer);
+                            	map.removeLayer(photogeojson);
+                        	}	
+                        	catch(err) {}
+                                geodata = jQuery.parseJSON(data);
+                                geojsonLayer2 = L.geoJson(geodata).addTo(map);
+                                map.fitBounds(geojsonLayer2.getBounds());
+             		            document.getElementById('formparcel').style.cursor = 'progress';
+                    	        geojsonLayer2.openPopup();
+             		            document.getElementById('formparcel').style.cursor = '';
+                         	   	lastgeojsonLayer = geojsonLayer2;
+                            	lastgeojsonLayer.openPopup();
+                        },
+                        error: function(){
+                            console.log(data);
+                        }
+                });
+
+            });
+
+
+
 
 }
+
 
 
 
