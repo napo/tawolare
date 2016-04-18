@@ -4,7 +4,14 @@ web api per consultare i dati del catasto fondiaro della Provincia Autonoma di T
 # demo
 [http://tavolare.labmod.org](http://tavolare.labmod.org/map/)
 ## screenshot
-![particella catastale](https://raw.githubusercontent.com/napo/tawolare/master/screenshots/catasto_su_osm.png = 250x)
+![particella catastale](https://github.com/napo/tawolare/blob/master/screenshots/particella_da_clic.png?raw=true)
+![particella foto aerea](https://github.com/napo/tawolare/blob/master/screenshots/particella_foto_area.png?raw=true)
+![layer particelle catastali](https://github.com/napo/tawolare/blob/master/screenshots/particelle_catastali.png?raw=true)
+![ricerca per numero particella](https://github.com/napo/tawolare/blob/master/screenshots/ricerca_particella.png?raw=true)
+![da interrogazione per codice](https://github.com/napo/tawolare/blob/master/screenshots/catasto_su_osm.png?raw=true)
+![caricamento foto](https://github.com/napo/tawolare/blob/master/screenshots/carica_foto.png?raw=true)
+![foto caricata](https://github.com/napo/tawolare/blob/master/screenshots/foto_parco.png?raw=true)
+
 
 # descrizione
 L'applicazione mostra i dati del catasto della Provincia Autonoma di Trento<br/>
