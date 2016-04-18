@@ -3,6 +3,9 @@ web api per consultare i dati del catasto fondiaro della Provincia Autonoma di T
 
 # demo
 [http://tavolare.labmod.org](http://tavolare.labmod.org/map/)
+## screenshot
+![particella catastale](https://raw.githubusercontent.com/napo/tawolare/master/screenshots/catasto_su_osm.png = 250x)
+
 # descrizione
 L'applicazione mostra i dati del catasto della Provincia Autonoma di Trento<br/>
 I dati vengono dal rilascio in open data da parte del servizio competente sul geocatalogo provinciale e sul portale dati.trentino.it
