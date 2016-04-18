@@ -15,14 +15,15 @@ il bottone <i class='fa fa-map-marker' aria-hidden='true'></i> invia le coordina
 <li><strong>ricerca luoghi</strong></br/>
 il bottone <i class='fa fa-search' aria-hidden='true'></i> permette di fare ricerche per toponimo usando il geocoder <a href="http://nominatim.openstreetmap.org">nominatim</a> basato su openstreetmap</li>
 <li><strong>interrogazione particelle</strong><br/>
-una volta selezionato il bottone <i class="fa fa-info" aria-hidden="true"></i>, un qualsiasi clic sulla mappa - all'interno dei confini della Provincia Autonoma di Trento - interrogherà i dati visualizzando la poligonale della relativa particella catastale.
+una volta selezionato il bottone <i class="fa fa-info" aria-hidden="true"></i>, un qualsiasi clic sulla mappa - all'interno dei confini della Provincia Autonoma di Trento - interrogherà i dati visualizzando la poligonale della relativa particella catastale.</li>
+<li><strong>visualizzazione particelle da codice</strong><br/>
+attraverso il bottone <i class="fa fa-binoculars" aria-hidden="true"></i>, è possibile visualizzare la geometria di una particella catastale inserendo il nome o codice del comune catastale e il numero di particella.</li>
 <li><strong>particella da fotografia con geotag</strong><br/>
 è possibile caricare fotografie arricchite da coordinate gps per individuare le particelle catastali.<br/>
 A questo indirizzo <a href="https://github.com/napo/tawolare/tree/master/esempi" target="_new">https://github.com/napo/tawolare/tree/master/esempi</a> sono presenti alcuni esempi per cominciare.
 </li>
 </ul>
-L'applicazione funziona solo per i dati del territorio Trentino<br/>
-<br/>
+L'applicazione fornisce solo i dati per il territorio Trentino<br/>
 <br/>
 Il software è rilasciato come open source usando la licenza <a href="https://github.com/napo/tawolare/blob/master/LICENSE" target="_new">MIT</a><br/>
 Maggiori dettagli alla pagina su github

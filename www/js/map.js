@@ -234,7 +234,7 @@ function main() {
       states: [{
         stateName: 'interroga',
         icon: 'fa-info',
-        title: 'selezioando questa icona i clic sulla mappa serviranno ad interrogare le particelle catastali',
+        title: 'selezionando questa icona i clic sulla mappa serviranno ad interrogare le particelle catastali',
         onClick: function(control) {
 	    viewparcel = 1	
 	    control.state('fine');
@@ -252,7 +252,7 @@ function main() {
     toggle.addTo(map);
 
     $('#cadastries').typeahead({
-            ajax: '/api/comune/catastale/lista',
+            ajax: 'api/comune/catastale/lista',
             display: 'nome',
             val: 'id'
     }); 
@@ -263,7 +263,7 @@ function main() {
                 var formdata = {};
                 formdata["idcomune"] = idcomune;
                 formdata["numparticella"] = numparticella;
-                var urlapi = "/api/trovaparticella";
+                var urlapi = "api/trovaparticella";
                 $.ajax({
                     type: "get",
                     url: urlapi,
@@ -271,19 +271,18 @@ function main() {
                     success: function(data){
                             var geojsonLayer2 = L.geoJson(null,{onEachFeature:popUp}).addTo(map);
                             $('#findlandparcel').modal('hide');
-                            //$('.modal-backdrop').hide();
                         	try {
                          	   	map.removeLayer(lastgeojsonLayer);
-                            	map.removeLayer(photogeojson);
+                            		map.removeLayer(photogeojson);
                         	}	
                         	catch(err) {}
+             		        document.getElementById('map').style.cursor = 'progress';
                                 geodata = jQuery.parseJSON(data);
                                 geojsonLayer2 = L.geoJson(geodata).addTo(map);
                                 map.fitBounds(geojsonLayer2.getBounds());
-             		            document.getElementById('formparcel').style.cursor = 'progress';
                     	        geojsonLayer2.openPopup();
-             		            document.getElementById('formparcel').style.cursor = '';
-                         	   	lastgeojsonLayer = geojsonLayer2;
+             		        document.getElementById('map').style.cursor = '';
+                         	lastgeojsonLayer = geojsonLayer2;
                             	lastgeojsonLayer.openPopup();
                         },
                         error: function(){

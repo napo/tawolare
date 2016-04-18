@@ -40,7 +40,7 @@ body {
       </div>
       <div class="modal-body">
       <div class="alert alert-warning" role="alert">
-        L'immagine caricata non contiene informazioni geografiche.
+       non è possibile fornire informazioni con dati dati inseriti 
        </div>
       </div>
       <div class="modal-footer">
@@ -60,7 +60,7 @@ body {
 % include('api.tpl')
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Chiudi</button>
       </div>
     </div>
   </div>
@@ -70,13 +70,13 @@ body {
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="labelInfo">INFO</h4>
+        <h4 class="modal-title" id="labelInfo">Informazioni</h4>
       </div>
       <div class="modal-body">
 % include('info.tpl')
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Chiudi</button>
       </div>
     </div>
   </div>
