@@ -52,7 +52,7 @@ def apidesc():
     try:
         return {"servername": serverInfo() }
     except Exception as e:
-        print(e)
+        return e
     
 @app.route('/showip')
 def show_ip():
@@ -61,13 +61,12 @@ def show_ip():
 
 @app.route('/api/particella/<y>/<x>')
 def particella(x,y):
-    print request.script_name
     try:
         catasto = Catasto()
         landParcel = catasto.findLandParcel(x,y)  
         return catasto.joinGeoJSON(landParcel)
     except Exception as e:
-        print(e)
+        return e
 
 @app.route('/api/comune/amministrativo/<id>')
 def nametownship(id):
@@ -104,12 +103,11 @@ def error404(error):
     try:
         return
     except Exception as e:
-        print(e)
+        return e
 
 
 @app.route('/api/upload', method='POST')
 def do_upload():
-#    try:
     upload = request.files.get('upload')
     data = request.files.upload
     name, ext = os.path.splitext(upload.filename)
@@ -130,7 +128,7 @@ def do_upload():
         for p in particelle:
             geoposition.append(p)
         geoposition = catasto.joinGeoJSON(geoposition)
-    return  str(geoposition)
+    return str(geoposition)
 
         
 @app.route("/")
@@ -139,7 +137,7 @@ def home():
     try:
         return {"servername": serverInfo()}
     except Exception as e:
-        print(e)
+        return e
         
 @app.route('/test')
 def test():
@@ -162,9 +160,6 @@ def test():
     except Exception as e:
         print(e)
         
-#app.run(host='0.0.0.0', port=8515, reloader=True)
-
 if __name__ == '__main__':
-#    app.run(host='0.0.0.0', port=8515, debug=True,reloader=True,server=FlupFCGIServer)
     app.run(host='0.0.0.0', port=8515, debug=True,reloader=True)
 

@@ -195,7 +195,7 @@ class Catasto():
         results = self.idCadastryships(x,y)
         point = self.sqlPoint(x,y)
         for r in results:
-            sql = 'select codcc, num, dsup_sopra, dsup_sotto, fab, aswkt(transform(geometry,4326)) as wkt, ctwexpr_ as ctwexpr, ctwexpr_id, tipop,  area, perimeter  from `%s` where within(%s,Geometry) ==1' % (r,point);
+            sql = 'select codcc, num, dsup_sopra, dsup_sotto, fab, aswkt(transform(geometry,4326)) as wkt, ctwexpr_ as ctwexpr, ctwexpr_id, tipop,  area, perimeter, X(transform(centroid(geometry),4326)) as centroidX, Y(transform(centroid(geometry),4326)) as centroidY  from `%s` where within(%s,Geometry) ==1' % (r,point);
             fparcels = self.cur.execute(sql).fetchall()
             if len(fparcels) > 0:
                 for fparcel in fparcels:
@@ -209,7 +209,9 @@ class Catasto():
                     properties['ctwexpr_id']=fparcel[7]
                     properties['tipop']=fparcel[8]
                     properties['area']=fparcel[9]
-                    properties['perimeter']=fparcel[10]      
+                    properties['perimeter']=fparcel[10]  
+                    properties['centroidX']=fparcel[11]
+                    properties['centroidY']=fparcel[12]
                     dcat = self.dataCadastryTownship(fparcel[0])
                     properties['dcat'] = dcat[0][0]
                     properties['comu'] = dcat[0][1]

@@ -54,6 +54,12 @@ Il geojson contiene la poligonale della particella e i seguenti attributi:
     <tr>
         <td>area</td><td><em>area della particella in metri quadri</em></td>
      </tr>
+    <tr>
+        <td>centroidX</td><td><em>contiene la longitudine del centroide del poligono</em></td>
+    </tr>
+    <tr>
+        <td>centroidX</td><td><em>contiene la latitudine del centroide del poligono</em></td>
+     </tr>
     </table>
     </p>
     <h3>esempio</h3>

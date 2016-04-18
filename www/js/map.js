@@ -11,7 +11,7 @@ function popUp(f,l){
     var message = '';
     if (f.properties){
             if('img' in f.properties) { 
-               message += '<img src="www/photos/' + f.properties['img'] + '" style="width:300px"/>';
+               message += '<img src="www/photos/' + f.properties['img'] + '" style="width:200px"/>';
             } else {
                 message = '<p><h4>comune di ' + f.properties["comune"] + ' - codice ' + f.properties["comu"] + '</h4>';
                 message += "<h5>comune catastale di " + f.properties["dcat"] + " - codice " + f.properties["codcc"] + "</h5>";
@@ -58,12 +58,6 @@ function popUp(f,l){
                 message += '</tr>';
                 message += '<tr>';
                 message += '<td>perimetro:</td><td>'+ Math.round(f.properties["perimeter"]).toLocaleString()  + ' m</td>';
-                message += '</tr>';
-                message += '<tr>';
-                message += '<td>ctwexpr:</td><td>'+ f.properties["ctwexpr"]  + '</td>';
-                message += '</tr>';
-                message += '<tr>';
-                message += '<td>ctwexpr_id:</td><td>'+ f.properties["ctwexpr_id"]  + '</td>';
                 message += '</tr>';
                 message += '</table>';
                 message += '</p>';
