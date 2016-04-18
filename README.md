@@ -103,7 +103,7 @@ catasto = Catasto()
 print catasto.findLandParcel(46.0910463043362,11.118695139884947)
 ```
 
-```bash
+```javascript
 [{
 	"geometry": {
 		"coordinates": [
