@@ -275,16 +275,22 @@ function main() {
                             		map.removeLayer(photogeojson);
                         	}	
                         	catch(err) {}
+				try {
              		            document.getElementById('map').style.cursor = 'progress';
 				               // var geojsonLayer = L.geoJson(null,{onEachFeature:popUp}).addTo(map);
-                                geodata = jQuery.parseJSON(data);
-                                geojsonLayer = L.geoJson(geodata,{onEachFeature:popUp}).addTo(map);
-                                map.fitBounds(geojsonLayer.getBounds());
-                    	        geojsonLayer.openPopup();
-             		            document.getElementById('map').style.cursor = '';
-                         	    lastgeojsonLayer = geojsonLayer;
-                            	lastgeojsonLayer.openPopup();
-                        },
+                                	geodata = jQuery.parseJSON(data);
+                                	geojsonLayer = L.geoJson(geodata,{onEachFeature:popUp}).addTo(map);
+                                	map.fitBounds(geojsonLayer.getBounds());
+                    	        	geojsonLayer.openPopup();
+             		            	document.getElementById('map').style.cursor = '';
+                         	    	lastgeojsonLayer = geojsonLayer;
+                            		lastgeojsonLayer.openPopup();
+				}
+				catch(err) { 
+                        $('#errorMessage').modal('show'); 
+                            document.getElementById('map').style.cursor = '';                        
+                        }
+                },
                         error: function(){
         			$('#errorMessage').modal('show');
                         }
