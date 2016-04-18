@@ -13,6 +13,7 @@
    <!-- <script src="www/js/exif.js"></script> -->
 <script src="www/js/trentino.js"></script>
 <script src="www/js/map.js"></script>
+<!--<script src="www/js/googleanalytics.js"></script>-->
     <style>
 html, body, #container {
   height: 100%;
