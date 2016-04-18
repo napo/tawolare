@@ -94,7 +94,6 @@ formupload.on('fileuploaded', function(event, data, previewId, index) {
     }
     catch(err) {
         $('#errorMessage').modal('show');
-        console.log(err)
     }
 });
 
@@ -191,7 +190,7 @@ function main() {
         	}	
         	catch(err) {}
          		document.getElementById('map').style.cursor = 'progress';
-			    var geojsonLayer = L.geoJson(null,{onEachFeature:popUp}).addTo(map);
+			var geojsonLayer = L.geoJson(null,{onEachFeature:popUp}).addTo(map);
          		geojsonLayer.fire('data:loading');
          		$.getJSON("api/particella/"+lat+"/"+lon, function (data) {
                 	geojsonLayer.fire('data:loaded');
@@ -269,24 +268,25 @@ function main() {
                     url: urlapi,
                     data: formdata,
                     success: function(data){
-                            var geojsonLayer2 = L.geoJson(null,{onEachFeature:popUp}).addTo(map);
+                            var geojsonLayer = L.geoJson(null,{onEachFeature:popUp}).addTo(map);
                             $('#findlandparcel').modal('hide');
                         	try {
                          	   	map.removeLayer(lastgeojsonLayer);
                             		map.removeLayer(photogeojson);
                         	}	
                         	catch(err) {}
-             		        document.getElementById('map').style.cursor = 'progress';
+             		            document.getElementById('map').style.cursor = 'progress';
+				               // var geojsonLayer = L.geoJson(null,{onEachFeature:popUp}).addTo(map);
                                 geodata = jQuery.parseJSON(data);
-                                geojsonLayer2 = L.geoJson(geodata).addTo(map);
-                                map.fitBounds(geojsonLayer2.getBounds());
-                    	        geojsonLayer2.openPopup();
-             		        document.getElementById('map').style.cursor = '';
-                         	lastgeojsonLayer = geojsonLayer2;
+                                geojsonLayer = L.geoJson(geodata,{onEachFeature:popUp}).addTo(map);
+                                map.fitBounds(geojsonLayer.getBounds());
+                    	        geojsonLayer.openPopup();
+             		            document.getElementById('map').style.cursor = '';
+                         	    lastgeojsonLayer = geojsonLayer;
                             	lastgeojsonLayer.openPopup();
                         },
                         error: function(){
-                            console.log(data);
+        			$('#errorMessage').modal('show');
                         }
                 });
 
