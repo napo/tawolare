@@ -20,8 +20,6 @@ I dati vengono dal rilascio in open data da parte del servizio competente sul ge
 Funzioni principali
 - doppio clic sulla mappa<br/>visualizza una poligonale contenente le informazioni sulla particella catastale nel punto dove si è fatto il clic
 - upload photo<br/> è possibile caricare fotografie arricchite da coordinate gps per individuare le particelle catastali
-  
-
 
 # installazione
 ## pre-requisiti
@@ -49,6 +47,20 @@ L'applicazione è quindi pronta per essere utilizzata sul proprio computer avvia
 python tawolare.py
 ```
 e aprire un browser all'indirizzo http://127.0.0.1:8515
+
+### quick&dirty per ubuntu
+```bash
+sudo apt-get install python-software-properties
+sudo add-apt-repository ppa:ubuntugis/ubuntugis-unstable
+sudo apt-get install spatialite spatialite-tools
+chmod +x setup_catasto.sh
+./setup_catasto.sh
+git clone git@github.com:napo/tawolare.git
+cd tawolare
+pip install -r requirements.txt
+python tawolare.py
+```
+... apri il tuo browser a http://127.0.0.1:8515
 
 ## installazione su un server
 l'applicazione può essere installata su un server pubblico attraverso il modulo WSGI di Apache.<br/>
@@ -79,7 +91,7 @@ foto = Photo('esempi/trento.jpg')
 print foto.getGeoJSON()
 ```
 output
-```json
+```javascript
 {
 	"geometry": {
 		"coordinates": [11.125277777777779, 46.07194444444445],
@@ -102,7 +114,7 @@ from catastodb import Catasto
 catasto = Catasto()
 print catasto.findLandParcel(46.0910463043362,11.118695139884947)
 ```
-
+output
 ```javascript
 [{
 	"geometry": {
