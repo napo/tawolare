@@ -93,7 +93,7 @@ Il geojson contiene la poligonale della particella e i seguenti attributi:
         <div class="well well-sm"><span style="font-family: courier">{{servername}}/api/comune/catastale/<em>id</em></span></div>
 	<p>restistuisce un geojson con il comune catastale corrispondente al codice catastale univoco</p>
 	<h3>esempio</h3>
-	<div class="well well-sm"><span style="font-family: courier"><a target="_new" href="{{servername}}/api/comune/catastale/116">{servername}}/api/comune/catastale/116</a></div>
+	<div class="well well-sm"><span style="font-family: courier"><a target="_new" href="{{servername}}/api/comune/catastale/116">{{servername}}/api/comune/catastale/116</a></div>
 	</div>
         <div class="tab-pane" id="api5">
 	<h2>comune amministrativo da codice univoco</h2>
@@ -101,10 +101,8 @@ Il geojson contiene la poligonale della particella e i seguenti attributi:
         <div class="well well-sm"><span style="font-family: courier">{{servername}}/api/comune/catastale/<em>id</em></span></div>
         <p>restistuisce un geojson con il comune amministrativo corrispondente al codice amministrativo univoco</p>
         <h3>esempio</h3>
-        <div class="well well-sm"><span style="font-family: courier"><a target="_new" href="{{servername}}/api/comune/amministrativo/116">{servername}}/api/comune/amministrativo/116</a></div>
+        <div class="well well-sm"><span style="font-family: courier"><a target="_new" href="{{servername}}/api/comune/amministrativo/116">{{servername}}/api/comune/amministrativo/116</a></div>
         </div>
-        
-	</div>
         <div class="tab-pane" id="api6">
             <h2>particella catastale da foto con geotag</h2>
             <h3>endpoint</h3>
