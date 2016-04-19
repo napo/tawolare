@@ -12,9 +12,9 @@
     <script src="www/L.Control.Locate.min.js"></script>
     <script src="www/easy-button.js"></script> 
     <script src="www/js/FileSaver.min.js"></script>
-<!--    <script src="www/js/googleanytics.js"></script>-->
-<script src="www/js/trentino.js"></script>
-<script src="www/js/map.js"></script>
+    <script src="www/js/googleanytics.js"></script>
+    <script src="www/js/trentino.js"></script>
+    <script src="www/js/map.js"></script>
     <style>
 html, body, #container {
   height: 100%;
