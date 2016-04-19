@@ -1,4 +1,4 @@
-# tawolare ver 0.1
+# tawolare ver 0.2
 web api per consultare i dati del catasto fondiaro della Provincia Autonoma di Trento
 
 # demo
@@ -40,7 +40,7 @@ nota: sulla macchina deve essere presente wget
 ## utilizzo
 Una volta preparati i dati, e sufficente installare le librerie python dipendenti attraverso pip
 ```bash
-pip install -r requirements)
+pip install -r requirements
 ```
 L'applicazione è quindi pronta per essere utilizzata sul proprio computer avviandola da command line
 ```bash

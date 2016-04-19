@@ -6,6 +6,20 @@ var lastphotoLayer = null;
 var lc = null;
 var formupload =  $("#uploadfile")
 var viewparcel = 0
+
+function downloadPart(ccat,num) {
+    var urlapi = "api/trovaparticella?idcomune=" + ccat + "&numparticella=" + num;
+    urlapi = urlapi.replace('0.', '.')
+    $.ajax({
+        type: "get",
+        url: urlapi,
+        success: function(data){
+            var blob = new Blob([data], {type: "application/json;charset=utf-8"});
+            saveAs(blob, "particella.geojson");
+		}
+    });
+  }
+
 function popUp(f,l){
     var out = [];
     var message = '';
@@ -38,7 +52,7 @@ function popUp(f,l){
                 }
                 if (fab != "") {
                     message += '<tr>';
-                    message += '<td>fabbricabile: </td><td>'+ fab  + '</td>'
+                    message += '<td>fabbricato: </td><td>'+ fab  + '</td>'
                     message += '</tr>';
                 }
                 if (f.properties["dsup_sopra"] != "") {
@@ -49,7 +63,7 @@ function popUp(f,l){
 
                 if (f.properties["dsup_sotto"] != "") {
                     message += '<tr>';
-                    message += '<td>numero particelle diritto superficie sotto il suolo:</td><td>'+ f.properties["dsup_sotto"]  + '</td>';
+                    message += '<td>numero particelle diritto superficie sotto il suolo:</td><td>'+ f.properties["dsup_sotto"]  + '</td>';$('#downloadparticella').click( function() { console.log("download"); return false; } );
                     message += '</tr>';
                 }
 
@@ -59,12 +73,23 @@ function popUp(f,l){
                 message += '<tr>';
                 message += '<td>perimetro:</td><td>'+ Math.round(f.properties["perimeter"]).toLocaleString()  + ' m</td>';
                 message += '</tr>';
+                message += '<tr>';
+                message += '<td>centroide longitudine</td><td>'+ f.properties["centroidX"] + '</td>';
+                message += '</tr>';
+                message += '<tr>';
+                message += '<td>centroide latitudine</td><td>'+ f.properties["centroidY"] + '</td>';
+                message += '</tr>';
+
                 message += '</table>';
                 message += '</p>';
+                codcc = "" + f.properties["codcc"];
+                num =  "" + f.properties["num"];
+		        message += '<p><span style="font-size: small">download <a  href="#" onclick="downloadPart(' + codcc + ',' + num  + '); return false">particella.geojson</a></span></p>'
         }
         l.bindPopup(message);
     }
 }
+
 
 
 formupload.fileinput({
@@ -122,11 +147,11 @@ function main() {
 	mapboxAttrib = 'Mapbox - Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors' +
 				'<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
 				'Imagery © <a href="http://mapbox.com">Mapbox</a>';
-        var wmfurl = "https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png"
-        var wmfattrib = "Wikimedia maps beta | Map data &copy; <a href='http://openstreetmap.org'>OpenStreetMap</a> contributors>"
+        var wmfurl = "https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png";
+        var wmfattrib = "Wikimedia maps beta | Map data &copy; <a href='http://openstreetmap.org'>OpenStreetMap</a> contributors>";
 
-        var hotosmurl = 'http://tile-{s}.openstreetmap.fr/hot/{z}/{x}/{y}.png'
-        var hotosmattrib = '© <A href="http://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>. Tiles courtesy of <a href="http://hot.openstreetmap.org/">Humanitarian OpenStreetMap Team</a>'
+        var hotosmurl = 'http://tile-{s}.openstreetmap.fr/hot/{z}/{x}/{y}.png';
+        var hotosmattrib = '© <A href="http://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>. Tiles courtesy of <a href="http://hot.openstreetmap.org/">Humanitarian OpenStreetMap Team</a>';
 
 
         var wmfmap = new L.TileLayer(wmfurl, {attribution: wmfattrib});
@@ -277,7 +302,6 @@ function main() {
                         	catch(err) {}
 				try {
              		            document.getElementById('map').style.cursor = 'progress';
-				               // var geojsonLayer = L.geoJson(null,{onEachFeature:popUp}).addTo(map);
                                 	geodata = jQuery.parseJSON(data);
                                 	geojsonLayer = L.geoJson(geodata,{onEachFeature:popUp}).addTo(map);
                                 	map.fitBounds(geojsonLayer.getBounds());
