@@ -55,7 +55,7 @@ sudo add-apt-repository ppa:ubuntugis/ubuntugis-unstable
 sudo apt-get install spatialite spatialite-tools
 chmod +x setup_catasto.sh
 ./setup_catasto.sh
-git clone git@github.com:napo/tawolare.git
+git clone http@github.com:napo/tawolare.git
 cd tawolare
 pip install -r requirements.txt
 python tawolare.py
