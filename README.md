@@ -40,7 +40,7 @@ nota: sulla macchina deve essere presente wget
 ## utilizzo
 Una volta preparati i dati, e sufficente installare le librerie python dipendenti attraverso pip
 ```bash
-pip install -r requirements
+pip install -r requirements.txt
 ```
 L'applicazione è quindi pronta per essere utilizzata sul proprio computer avviandola da command line
 ```bash
@@ -53,6 +53,7 @@ e aprire un browser all'indirizzo http://127.0.0.1:8515
 sudo apt-get install python-software-properties
 sudo add-apt-repository ppa:ubuntugis/ubuntugis-unstable
 sudo apt-get install spatialite spatialite-tools
+apt-get install libpython2.7-dev
 chmod +x setup_catasto.sh
 ./setup_catasto.sh
 git clone http@github.com:napo/tawolare.git
