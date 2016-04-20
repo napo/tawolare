@@ -342,10 +342,19 @@ function main() {
 
             });
 
-
+    $(document).ready(function(){
+        var margin = 78;
+        $('#map').on('mousedown',function(){
+            $('#navBar').css('margin-top',margin+'px');
+        });  
+        $('#map').blur(function(){
+            margin = margin+78;
+        }); 
+    });
 
 
 }
+
 
 
 

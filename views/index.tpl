@@ -3,7 +3,7 @@
     <div class="navbar navbar-default navbar-fixed-top" role="navigation">
       <div class="container-fluid">
 
-          <div class="navbar-header">
+          <div class="navbar-header" id="navBar">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
               <span class="sr-only">Toggle navigation</span>
               <span class="icon-bar"></span>
@@ -13,7 +13,7 @@
             <a class="navbar-brand">Catasto Fondiario Trentino</a>
           </div>
 
-        <div class="navbar-collapse collapse">
+        <div class="navbar-collapse collapse" id="navbar">
             <ul class="nav navbar-nav">
               <li><a href="#" data-toggle="modal" data-target="#uploadphoto">Localizza con foto</a>
               <li><a href="#" data-toggle="modal" data-target="#info">Info</a></li>
