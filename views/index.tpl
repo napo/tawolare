@@ -13,7 +13,7 @@
             <a class="navbar-brand">Catasto Fondiario Trentino</a>
           </div>
 
-        <div class="navbar-collapse collapse">
+        <div class="navbar-collapse collapse" id="navbar">
             <ul class="nav navbar-nav">
               <li><a href="#" data-toggle="modal" data-target="#uploadphoto">Localizza con foto</a>
               <li><a href="#" data-toggle="modal" data-target="#info">Info</a></li>

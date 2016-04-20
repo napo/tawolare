@@ -234,7 +234,7 @@ function main() {
         	lastgeojsonLayer.openPopup();
 	}
     }
-    var miniMap = new L.Control.MiniMap(mapbox, { toggleDisplay: true }).addTo(map);
+    var miniMap = new L.Control.MiniMap(mapbox, { autoToggleDisplay: true }).addTo(map);
 	
    /* map.doubleClickZoom.disable(); */
     map.on('click',onMapClick);
@@ -341,6 +341,17 @@ function main() {
                 });
 
             });
+/*
+    $(document).ready(function(){
+        var margin = 78;
+        $('#map').on('mousedown',function(){
+            $('#navBar').css('margin-top',margin+'px');
+        });  
+        $('#map').blur(function(){
+            margin = margin+78;
+        }); 
+    });
+*/
 
 }
 

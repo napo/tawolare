@@ -11,7 +11,7 @@
     <script src="www/js/leaflet-hash.js"></script>
     <script src="www/L.Control.Locate.min.js"></script>
     <script src="www/easy-button.js"></script> 
-	<script src="www/Leaflet.Coordinates-0.1.5.min.js"></script>
+    <script src="www/Leaflet.Coordinates-0.1.5.min.js"></script>
     <script src="www/leaflet-measure.js"></script>
     <script src="www/js/FileSaver.min.js"></script>
     <script src="www/js/googleanalytics.js"></script>
@@ -20,8 +20,7 @@
     <style>
 html, body, #container {
   height: 100%;
-  overflow: hidden;var blob = new Blob(["Hello, world!"], {type: "text/plain;charset=utf-8"});
-saveAs(blob, "hello world.txt");
+  overflow: hidden;
   width: 100%;
 }
 body {
@@ -79,7 +78,7 @@ body {
       <div class="modal-body">
 % include('info.tpl')
       </div>
-      <div class="modal-footer">http://www.trentinowine.info/2016/04/territorio-trasparente/
+      <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Chiudi</button>
       </div>
     </div>

@@ -15,7 +15,7 @@ il bottone <i class='fa fa-map-marker' aria-hidden='true'></i> invia le coordina
 <li><strong>ricerca luoghi</strong></br/>
 il bottone <i class='fa fa-search' aria-hidden='true'></i> permette di fare ricerche per toponimo usando il geocoder <a href="http://nominatim.openstreetmap.org">nominatim</a> basato su openstreetmap</li>
 <li><strong>interrogazione particelle</strong><br/>
-una volta selezionato il bottone <i class="fa fa-info" aria-hidden="true"></i>, un qualsiasi clic sulla mappa - all'interno dei confini della Provincia Autonoma di Trento - interrogherà i dati visualizzando la poligonale della relativa particella catastale.</li>
+una volta selezionato il bottone <i class="fa fa-info" aria-hidden="true"></i>, un qualsiasi clic sulla mappa - all'interno dei confini della Provincia Autonoma di Trento - interrogherà i dati visualizzando la poligonale della relativa particella catastale. L'icona per l'interrogazione cambierà dalla i a questa <i class="fa fa-info-circle"></i> e fino a che non sarà ripremuto il bottone, ogni clic su mappa risponderà ad una interrogazione di particelle</li>
 <li><strong>visualizzazione particelle da codice</strong><br/>
 attraverso il bottone <i class="fa fa-binoculars" aria-hidden="true"></i>, è possibile visualizzare la geometria di una particella catastale inserendo il nome o codice del comune catastale e il numero di particella.</li>
 <li><strong>particella da fotografia con geotag</strong><br/>
