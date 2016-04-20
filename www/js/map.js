@@ -234,7 +234,7 @@ function main() {
         	lastgeojsonLayer.openPopup();
 	}
     }
-    var miniMap = new L.Control.MiniMap(mapbox, { autoToggleDisplay: true }).addTo(map);
+    var miniMap = new L.Control.MiniMap(mapbox, { toggleDisplay: true, minimized: true }).addTo(map);
 	
    /* map.doubleClickZoom.disable(); */
     map.on('click',onMapClick);
