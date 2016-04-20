@@ -1,6 +1,6 @@
 <h2>Informazioni</h2>
 L'applicazione mostra i dati del catasto della Provincia Autonoma di Trento<br/>
-I dati vengono dal rilascio in open data da parte del servizio competente sul geocatalogo provinciale e sul portale <a href="http://dati.trentino.it" target="_new">http://dati.trentino.it</a><br/>
+I dati vengono dal rilascio in open data da parte del servizio competente sul <a href="http://www.territorio.provincia.tn.it/portal/server.pt/community/sgc_-_geocatalogo/862/sgc_-_geocatalogo/32157">geocatalogo provinciale</a> e sul portale <a href="http://dati.trentino.it" target="_new">http://dati.trentino.it</a><br/>
 L'aggiornamento pertanto è collegato a quel rilascio.<br/>
 Una alternativa più aggiornata (ma con funzioni diverse) viene da <a href="http://mobilekat.provincia.tn.it/mobilekat/indexd.html" target="_new">MobileKat</a> - applicazione ufficiale del Catasto della Provincia Autonoma di Trento.
 <p>
@@ -22,10 +22,14 @@ attraverso il bottone <i class="fa fa-binoculars" aria-hidden="true"></i>, è po
 è possibile caricare fotografie arricchite da coordinate gps per individuare le particelle catastali.<br/>
 A questo indirizzo <a href="https://github.com/napo/tawolare/tree/master/esempi" target="_new">https://github.com/napo/tawolare/tree/master/esempi</a> sono presenti alcuni esempi per cominciare.
 </li>
+<li><strong>calcolo delle misure</strong><br/>
+attraverso l'icona <img src="www/images/rulers.png"/> è possibile calcolare distanze ed aree semplicemente disegnando i punti sullo schermo.
+</li>
 </ul>
 L'applicazione fornisce solo i dati per il territorio Trentino<br/>
 <br/>
 Il software è rilasciato come open source usando la licenza <a href="https://github.com/napo/tawolare/blob/master/LICENSE" target="_new">MIT</a><br/>
+attuale versione 0.2<br/>
 Maggiori dettagli alla pagina su github
 <a href="http://github.com/napo/tawolare" target="_new">https://github.com/napo/tawolare</a>
 <br/>

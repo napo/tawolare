@@ -197,9 +197,14 @@ function main() {
                "catasto trentino": catasto
         };	  
 
+	L.control.coordinates({
+		position:"topright",
+		labelTemplateLat:"Latitude: {y}",
+		labelTemplateLng:"Longitude: {x}"
+	}).addTo(map);
+
 	L.control.layers(baseMaps, overlayMaps).addTo(map); 
     L.control.scale().addTo(map);
-
 
     var geojsonLayer = L.geoJson(null,{onEachFeature:popUp}).addTo(map);
 
@@ -231,8 +236,9 @@ function main() {
     }
     var miniMap = new L.Control.MiniMap(mapbox, { toggleDisplay: true }).addTo(map);
 	
-    map.doubleClickZoom.disable(); 
+   /* map.doubleClickZoom.disable(); */
     map.on('click',onMapClick);
+
 
     var hash = new L.Hash(map);
     lc = L.control.locate({
@@ -275,13 +281,27 @@ function main() {
     });
     toggle.addTo(map);
 
+    measureOptions = { 
+        position: 'topleft',
+        primaryLengthUnit: 'meters', 
+        secondaryLengthUnit: 'kilometers',
+        primaryAreaUnit: 'acres', 
+        secondaryAreaUnit: 'hectares',
+        localization: 'it',
+        activeColor: '#FF0000',
+        completedColor: '#FF6600'      
+    }
+
+    var measureControl = L.control.measure(measureOptions);
+    measureControl.addTo(map);
+
     $('#cadastries').typeahead({
             ajax: 'api/comune/catastale/lista',
             display: 'nome',
             val: 'id'
     }); 
 
-  $("#formparcel").submit(function(e){
+    $("#formparcel").submit(function(e){
                 idcomune = $('#cadastries').val().split(" -")[0];
                 numparticella = $('#numparcel').val();
                 var formdata = {};

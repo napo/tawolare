@@ -11,8 +11,10 @@
     <script src="www/js/leaflet-hash.js"></script>
     <script src="www/L.Control.Locate.min.js"></script>
     <script src="www/easy-button.js"></script> 
+	<script src="www/Leaflet.Coordinates-0.1.5.min.js"></script>
+    <script src="www/leaflet-measure.js"></script>
     <script src="www/js/FileSaver.min.js"></script>
-    <script src="www/js/googleanytics.js"></script>
+    <script src="www/js/googleanalytics.js"></script>
     <script src="www/js/trentino.js"></script>
     <script src="www/js/map.js"></script>
     <style>
@@ -77,7 +79,7 @@ body {
       <div class="modal-body">
 % include('info.tpl')
       </div>
-      <div class="modal-footer">
+      <div class="modal-footer">http://www.trentinowine.info/2016/04/territorio-trasparente/
         <button type="button" class="btn btn-default" data-dismiss="modal">Chiudi</button>
       </div>
     </div>
