@@ -12,8 +12,9 @@
     <script src="www/L.Control.Locate.min.js"></script>
     <script src="www/easy-button.js"></script> 
     <script src="www/Leaflet.Coordinates-0.1.5.min.js"></script>
-    <script src="www/leaflet-measure.js"></script>
+<!--    <script src="www/leaflet-measure.js"></script>-->
     <script src="www/js/FileSaver.min.js"></script>
+    <script src="www/js/tokml.js"></script>
     <script src="www/js/googleanalytics.js"></script>
     <script src="www/js/trentino.js"></script>
     <script src="www/js/map.js"></script>

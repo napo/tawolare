@@ -7,15 +7,94 @@ var lc = null;
 var formupload =  $("#uploadfile")
 var viewparcel = 0
 
+function getdescription(data) {
+    message = '<p><h4>comune di ' + data["comune"] + ' - codice ' + data["comu"] + '</h4>';
+    message += "<h5>comune catastale di " + data["dcat"] + " - codice " + data["codcc"] + "</h5>";
+    message += '<h2>particella catastale ' + data["num"] + '</h2>';
+    message += '<br/>';
+    message += '<table>';
+    tipop = "";
+    if  (data["tipop"] == "P") {
+        tipop = "principale"
+    } else if (data["tipop"] == "C") {
+        tipop = "pertinenza"
+    }
+    if (tipop != "") {
+        message += '<tr>';
+        message += '<td>tipo:</td><td>'+ tipop  + '</td>';
+        message += '</tr>';
+    }
+
+    fab = ""
+    if  (data["fab"] == "S") {
+        fab = "sì"
+    } else if (data["fab"] == "N") {
+        fab = "no"
+    }
+    if (fab != "") {
+        message += '<tr>';
+        message += '<td>fabbricato: </td><td>'+ fab  + '</td>'
+        message += '</tr>';
+    }
+    if (data["dsup_sopra"] != "") {
+        message += '<tr>';
+        message += '<td>numero particelle diritto superficie sopra il suolo:</td><td>'+ data  + '</td>';
+        message += '</tr>';
+    }
+
+    if (data["dsup_sotto"] != "") {
+        message += '<tr>';
+        message += '<td>numero particelle diritto superficie sotto il suolo:</td><td>'+ data + '</td>';
+        message += '</tr>';
+    }
+
+    message += '<tr>';
+    message += '<td>area:</td><td>'+ Math.round(data["area"]).toLocaleString()  + ' mq</td>';
+    message += '</tr>';
+    message += '<tr>';
+    message += '<td>perimetro:</td><td>'+ Math.round(data["perimeter"]).toLocaleString()  + ' m</td>';
+    message += '</tr>';
+    message += '<tr>';
+    message += '<td>centroide longitudine</td><td>'+ Math.round(data["centroidX"]).toLocaleString()  + '</td>';
+    message += '</tr>';
+    message += '<tr>';
+    message += '<td>centroide latitudine</td><td>'+ Math.round(data["centroidY"]).toLocaleString()  + '</td>';
+    message += '</tr>';
+    message += '</table>';
+    message += '</p>';
+    return message;
+}
+
 function downloadPart(ccat,num) {
     var urlapi = "api/trovaparticella?idcomune=" + ccat + "&numparticella=" + num;
-    urlapi = urlapi.replace('0.', '.')
+    urlapi = encodeURI(urlapi.replace('0.', '.'))
     $.ajax({
         type: "get",
         url: urlapi,
         success: function(data){
             var blob = new Blob([data], {type: "application/json;charset=utf-8"});
             saveAs(blob, "particella.geojson");
+		}
+    });
+  }
+
+function downloadPartKML(ccat,num,format) {
+    var urlapi = "api/trovaparticella?idcomune=" + ccat + "&numparticella=" + num;
+    urlapi = encodeURI(urlapi.replace('0.', '.'))
+    $.ajax({
+        type: "get",
+        url: urlapi,
+        success: function(data){
+            var geodata = jQuery.parseJSON(data);
+            content = getdescription(data)
+            titolo = 'particella ' + data["dcat"] + ' comune catastale' + data['codcc'] + ' - ' + data['dcat'] + ' nel comune di ' + data['comune'];
+            var kml = tokml(geodata, {
+                name: titolo,
+                description: content
+            });
+
+            var blobkml = new Blob([kml],{type: "Content-type: application/vnd.google-earth.kml+xml"});
+            saveAs(blobkml, "particella.kml");
 		}
     });
   }
@@ -27,65 +106,12 @@ function popUp(f,l){
             if('img' in f.properties) { 
                message += '<img src="www/photos/' + f.properties['img'] + '" style="width:200px"/>';
             } else {
-                message = '<p><h4>comune di ' + f.properties["comune"] + ' - codice ' + f.properties["comu"] + '</h4>';
-                message += "<h5>comune catastale di " + f.properties["dcat"] + " - codice " + f.properties["codcc"] + "</h5>";
-                message += '<h2>particella catastale ' + f.properties["num"] + '</h2>';
-                message += '<br/>';
-                message += '<table>';
-                tipop = "";
-                if  (f.properties["tipop"] == "P") {
-                    tipop = "principale"
-                } else if (f.properties["tipop"] == "C") {
-                    tipop = "pertinenza"
-                }
-                if (tipop != "") {
-                    message += '<tr>';
-                    message += '<td>tipo:</td><td>'+ tipop  + '</td>';
-                    message += '</tr>';
-                }
-
-                fab = ""
-                if  (f.properties["fab"] == "S") {
-                    fab = "sì"
-                } else if (f.properties["fab"] == "N") {
-                    fab = "no"
-                }
-                if (fab != "") {
-                    message += '<tr>';
-                    message += '<td>fabbricato: </td><td>'+ fab  + '</td>'
-                    message += '</tr>';
-                }
-                if (f.properties["dsup_sopra"] != "") {
-                    message += '<tr>';
-                    message += '<td>numero particelle diritto superficie sopra il suolo:</td><td>'+ f.properties["dsup_sopra"]  + '</td>';
-                    message += '</tr>';
-                }
-
-                if (f.properties["dsup_sotto"] != "") {
-                    message += '<tr>';
-                    message += '<td>numero particelle diritto superficie sotto il suolo:</td><td>'+ f.properties["dsup_sotto"]  + '</td>';$('#downloadparticella').click( function() { console.log("download"); return false; } );
-                    message += '</tr>';
-                }
-
-                message += '<tr>';
-                message += '<td>area:</td><td>'+ Math.round(f.properties["area"]).toLocaleString()  + ' mq</td>';
-                message += '</tr>';
-                message += '<tr>';
-                message += '<td>perimetro:</td><td>'+ Math.round(f.properties["perimeter"]).toLocaleString()  + ' m</td>';
-                message += '</tr>';
-                message += '<tr>';
-                message += '<td>centroide longitudine</td><td>'+ f.properties["centroidX"] + '</td>';
-                message += '</tr>';
-                message += '<tr>';
-                message += '<td>centroide latitudine</td><td>'+ f.properties["centroidY"] + '</td>';
-                message += '</tr>';
-
-                message += '</table>';
-                message += '</p>';
+                message = getdescription(f.properties);
                 codcc = "" + f.properties["codcc"];
                 num =  "" + f.properties["num"];
-		        message += '<p><span style="font-size: small">download <a  href="#" onclick="downloadPart(' + codcc + ',' + num  + '); return false">particella.geojson</a></span></p>'
-        }
+		        message += '<p><span style="font-size: small">download <a  href="#" onclick="downloadPart(' + codcc + ',' + num  + '); return false">particella.geojson</a>&nbsp;';
+		        message += '<a  href="#" onclick="downloadPartKML(' + codcc + ',' + num  + '); return false">particella.kml</a></span></p>'
+                }
         l.bindPopup(message);
     }
 }
@@ -280,7 +306,7 @@ function main() {
       }]
     });
     toggle.addTo(map);
-
+/*
     measureOptions = { 
         position: 'topleft',
         primaryLengthUnit: 'meters', 
@@ -294,7 +320,7 @@ function main() {
 
     var measureControl = L.control.measure(measureOptions);
     measureControl.addTo(map);
-
+*/
     $('#cadastries').typeahead({
             ajax: 'api/comune/catastale/lista',
             display: 'nome',
