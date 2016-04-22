@@ -111,8 +111,8 @@ function popUp(f,l){
                 message = getdescription(f.properties);
                 codcc = "" + f.properties["codcc"];
                 num =  "" + f.properties["num"];
-		        message += '<p><span style="font-size: small">download <a  href="#" onclick="downloadPart(' + codcc + ',' + num  + '); return false">particella.geojson</a>&nbsp;';
-		        message += '<a  href="#" onclick="downloadPartKML(' + codcc + ',' + num  + '); return false">particella.kml</a></span></p>'
+		        message += '<p><h3>download</h3> <a  href="#" onclick="downloadPart(' + codcc + ',' + num  + '); return false" alt="particella.geojson"><img src="www/images/geojson.png" width="64px"/></a>&nbsp;';
+		        message += '<a  href="#" onclick="downloadPartKML(' + codcc + ',' + num  + '); return false" alt="particella.kml"><img src="www/images/kml.png" width="64px"/></a></span></p>'
                 }
         l.bindPopup(message);
     }
