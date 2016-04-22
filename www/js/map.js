@@ -6,6 +6,8 @@ var lastphotoLayer = null;
 var lc = null;
 var formupload =  $("#uploadfile")
 var viewparcel = 0
+var target
+var spinner
 
 function getdescription(data) {
     message = '<p><h4>comune di ' + data["comune"] + ' - codice ' + data["comu"] + '</h4>';
@@ -179,7 +181,6 @@ function main() {
         var hotosmurl = 'http://tile-{s}.openstreetmap.fr/hot/{z}/{x}/{y}.png';
         var hotosmattrib = '© <A href="http://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>. Tiles courtesy of <a href="http://hot.openstreetmap.org/">Humanitarian OpenStreetMap Team</a>';
 
-
         var wmfmap = new L.TileLayer(wmfurl, {attribution: wmfattrib});
         var hotosm = new L.TileLayer(hotosmurl, {attribution: hotosmattrib});
 	    var mapboxsatellite = new L.TileLayer(mbsatelliteurl, {attribution: mbsatelliteattrib});
@@ -232,6 +233,9 @@ function main() {
 	L.control.layers(baseMaps, overlayMaps).addTo(map); 
     L.control.scale().addTo(map);
 
+    target = document.getElementById('map')
+    spinner = new Spinner(opts).spin(target);
+    spinner.stop()
     var geojsonLayer = L.geoJson(null,{onEachFeature:popUp}).addTo(map);
 
     photogeojson = L.geoJson(null,{onEachFeature:popUp,pointToLayer:drawCircle}).addTo(map); 
@@ -245,17 +249,18 @@ function main() {
             		map.removeLayer(photogeojson);
         	}	
         	catch(err) {}
-         		document.getElementById('map').style.cursor = 'progress';
-			var geojsonLayer = L.geoJson(null,{onEachFeature:popUp}).addTo(map);
+         		/*document.getElementById('map').style.cursor = 'progress';*/
+                spinner.spin()
+			    var geojsonLayer = L.geoJson(null,{onEachFeature:popUp}).addTo(map);
          		geojsonLayer.fire('data:loading');
          		$.getJSON("api/particella/"+lat+"/"+lon, function (data) {
                 	geojsonLayer.fire('data:loaded');
                 	geojsonLayer.addData(data);
                 	map.fitBounds(geojsonLayer.getBounds());
                 	geojsonLayer.openPopup();
-         		document.getElementById('map').style.cursor = '';
+         		/*document.getElementById('map').style.cursor = '';*/
             	});
-
+                spinner.stop();
      	   	lastgeojsonLayer = geojsonLayer;
         	lastgeojsonLayer.openPopup();
 	}
@@ -359,6 +364,7 @@ function main() {
 				catch(err) { 
                         $('#errorMessage').modal('show'); 
                             document.getElementById('map').style.cursor = '';                        
+                            
                         }
                 },
                         error: function(){
@@ -367,6 +373,30 @@ function main() {
                 });
 
             });
+
+var opts = {
+  lines: 11 // The number of lines to draw
+, length: 27 // The length of each line
+, width: 10 // The line thickness
+, radius: 22 // The radius of the inner circle
+, scale: 1.25 // Scales overall size of the spinner
+, corners: 1 // Corner roundness (0..1)
+, color: '#000' // #rgb or #rrggbb or array of colors
+, opacity: 0.45 // Opacity of the lines
+, rotate: 39 // The rotation offset
+, direction: -1 // 1: clockwise, -1: counterclockwise
+, speed: 1.3 // Rounds per second
+, trail: 40 // Afterglow percentage
+, fps: 20 // Frames per second when using setTimeout() as a fallback for CSS
+, zIndex: 2e9 // The z-index (defaults to 2000000000)
+, className: 'spinner' // The CSS class to assign to the spinner
+, top: '50%' // Top position relative to parent
+, left: '50%' // Left position relative to parent
+, shadow: true // Whether to render a shadow
+, hwaccel: true // Whether to use hardware acceleration
+, position: 'absolute' // Element positioning
+}
+
 /*
     $(document).ready(function(){
         var margin = 78;

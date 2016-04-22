@@ -15,6 +15,7 @@
 <!--    <script src="www/leaflet-measure.js"></script>-->
     <script src="www/js/FileSaver.min.js"></script>
     <script src="www/js/tokml.js"></script>
+    <script src="www/js/spin.min.js"></script>
     <script src="www/js/googleanalytics.js"></script>
     <script src="www/js/trentino.js"></script>
     <script src="www/js/map.js"></script>
@@ -33,6 +34,10 @@ body {
 #map {
   height: 100%;
   width: auto;
+}
+.fa-info-circle {
+  color: #4c74b6;
+  font-size: large;
 }
     </style>
 <div class="modal fade" id="errorMessage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
