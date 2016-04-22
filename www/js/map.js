@@ -242,6 +242,7 @@ function main() {
    
     function onMapClick(e) {
 	if (viewparcel == 1) {
+                spinner.spin()
         	lat = e.latlng.lat;
         	lon = e.latlng.lng;
         	try {
@@ -250,8 +251,7 @@ function main() {
         	}	
         	catch(err) {}
          		/*document.getElementById('map').style.cursor = 'progress';*/
-                spinner.spin()
-			    var geojsonLayer = L.geoJson(null,{onEachFeature:popUp}).addTo(map);
+			var geojsonLayer = L.geoJson(null,{onEachFeature:popUp}).addTo(map);
          		geojsonLayer.fire('data:loading');
          		$.getJSON("api/particella/"+lat+"/"+lon, function (data) {
                 	geojsonLayer.fire('data:loaded');
