@@ -1,4 +1,4 @@
-# tawolare ver 0.2
+# tawolare ver 0.3
 web api per consultare i dati del catasto fondiaro della Provincia Autonoma di Trento
 
 # demo
@@ -20,6 +20,16 @@ I dati vengono dal rilascio in open data da parte del servizio competente sul ge
 Funzioni principali
 - doppio clic sulla mappa<br/>visualizza una poligonale contenente le informazioni sulla particella catastale nel punto dove si è fatto il clic
 - upload photo<br/> è possibile caricare fotografie arricchite da coordinate gps per individuare le particelle catastali
+
+# funzioni
+- navigazione mappa
+- geocoding
+- posizionamento mappa da sensori del device
+- ricerca per particella catastale
+- individuazione particella catastale da foto con geotag
+- export in formato geojson e kml
+- API di interrogazione
+
 
 # installazione
 ## pre-requisiti
