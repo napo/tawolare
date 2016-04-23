@@ -22,9 +22,11 @@ attraverso il bottone <i class="fa fa-binoculars" aria-hidden="true"></i>, è po
 è possibile caricare fotografie arricchite da coordinate gps per individuare le particelle catastali.<br/>
 A questo indirizzo <a href="https://github.com/napo/tawolare/tree/master/esempi" target="_new">https://github.com/napo/tawolare/tree/master/esempi</a> sono presenti alcuni esempi per cominciare.
 </li>
+<!--
 <li><strong>calcolo delle misure</strong><br/>
 attraverso l'icona <img src="www/images/rulers.png"/> è possibile calcolare distanze ed aree semplicemente disegnando i punti sullo schermo.
 </li>
+-->
 </ul>
 L'applicazione fornisce solo i dati per il territorio Trentino<br/>
 <br/>
