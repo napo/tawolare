@@ -66,7 +66,7 @@ sudo apt-get install spatialite spatialite-tools
 apt-get install libpython2.7-dev
 chmod +x setup_catasto.sh
 ./setup_catasto.sh
-git clone http@github.com:napo/tawolare.git
+git clone https@github.com:napo/tawolare.git
 cd tawolare
 pip install -r requirements.txt
 python tawolare.py
