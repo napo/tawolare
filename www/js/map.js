@@ -4,11 +4,15 @@ var lastgeojsonLayer = null;
 var photogeojson = null;
 var lastphotoLayer = null;
 var lc = null;
-var formupload =  $("#uploadfile")
-var viewparcel = 0
-/*var target
-var spinner
-*/
+var formupload =  $("#uploadfile");
+var viewparcel = 0;
+var miniMap;
+$(window).resize(function() {
+  if ($(window).width() <= 600 ) {
+  	miniMap._minimize();
+   }   
+});
+
 
 function getdescription(data) {
     message = '<p><h4>comune di ' + data["comune"] + ' - codice ' + data["comu"] + '</h4>';
@@ -290,7 +294,7 @@ function main() {
         	lastgeojsonLayer.openPopup();
 	}
     }
-    var miniMap = new L.Control.MiniMap(mapbox, { toggleDisplay: true, minimized: true }).addTo(map);
+    miniMap = new L.Control.MiniMap(mapbox, { toggleDisplay: true, minimized: true }).addTo(map);
 	
    /* map.doubleClickZoom.disable(); */
     map.on('click',onMapClick);
