@@ -1,4 +1,4 @@
-# tawolare ver 0.5
+# tawolare ver 0.6
 web api per consultare i dati del catasto fondiaro della Provincia Autonoma di Trento
 
 # demo
