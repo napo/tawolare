@@ -266,7 +266,7 @@ function main() {
    
     function onMapClick(e) {
 	if (viewparcel == 1) {
-                map.spin(true)
+                map.spin(true);
         	lat = e.latlng.lat;
         	lon = e.latlng.lng;
         	try {
@@ -377,12 +377,14 @@ function main() {
                         	}	
                         	catch(err) {}
 				try {
-             		            document.getElementById('map').style.cursor = 'progress';
+					map.spin(true);
+             		            	document.getElementById('map').style.cursor = 'progress';
                                 	geodata = jQuery.parseJSON(data);
                                 	geojsonLayer = L.geoJson(geodata,{onEachFeature:popUp}).addTo(map);
                                 	map.fitBounds(geojsonLayer.getBounds());
                     	        	geojsonLayer.openPopup();
              		            	document.getElementById('map').style.cursor = '';
+					map.spin(false);
                          	    	lastgeojsonLayer = geojsonLayer;
                             		lastgeojsonLayer.openPopup();
 				}
