@@ -31,7 +31,7 @@ attraverso l'icona <img src="www/images/rulers.png"/> è possibile calcolare dis
 L'applicazione fornisce solo i dati per il territorio Trentino<br/>
 <br/>
 Il software è rilasciato come open source usando la licenza <a href="https://github.com/napo/tawolare/blob/master/LICENSE" target="_new">MIT</a><br/>
-attuale versione 0.4<br/>
+attuale versione 0.5<br/>
 Maggiori dettagli alla pagina su github
 <a href="http://github.com/napo/tawolare" target="_new">https://github.com/napo/tawolare</a>
 <br/>

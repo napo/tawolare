@@ -6,8 +6,9 @@ var lastphotoLayer = null;
 var lc = null;
 var formupload =  $("#uploadfile")
 var viewparcel = 0
-var target
+/*var target
 var spinner
+*/
 
 function getdescription(data) {
     message = '<p><h4>comune di ' + data["comune"] + ' - codice ' + data["comu"] + '</h4>';
@@ -57,10 +58,10 @@ function getdescription(data) {
     message += '<td>perimetro:</td><td>'+ Math.round(data["perimeter"]).toLocaleString()  + ' m</td>';
     message += '</tr>';
     message += '<tr>';
-    message += '<td>centroide longitudine</td><td>'+ Math.round(data["centroidX"]).toLocaleString()  + '</td>';
+    message += '<td>centroide longitudine</td><td>'+ data["centroidX"].toFixed(6)  + '</td>';
     message += '</tr>';
     message += '<tr>';
-    message += '<td>centroide latitudine</td><td>'+ Math.round(data["centroidY"]).toLocaleString()  + '</td>';
+    message += '<td>centroide latitudine</td><td>'+ data["centroidY"].toFixed(6)  + '</td>';
     message += '</tr>';
     message += '</table>';
     message += '</p>';
@@ -232,6 +233,7 @@ function main() {
 
 	L.control.layers(baseMaps, overlayMaps).addTo(map); 
     L.control.scale().addTo(map);
+/*
     var optspinner = {
       lines: 11 // The number of lines to draw
     , length: 27 // The length of each line
@@ -254,16 +256,17 @@ function main() {
     , hwaccel: true // Whether to use hardware acceleration
     , position: 'absolute' // Element positioning
     }
-    target = document.getElementById('map')
+    target = document.getElementById('map');
     spinner = new Spinner(optspinner).spin(target);
-    spinner.stop()
+    spinner.stop();
+*/
     var geojsonLayer = L.geoJson(null,{onEachFeature:popUp}).addTo(map);
 
     photogeojson = L.geoJson(null,{onEachFeature:popUp,pointToLayer:drawCircle}).addTo(map); 
    
     function onMapClick(e) {
 	if (viewparcel == 1) {
-                spinner.spin()
+                map.spin(true)
         	lat = e.latlng.lat;
         	lon = e.latlng.lng;
         	try {
@@ -281,7 +284,8 @@ function main() {
                 	geojsonLayer.openPopup();
          		/*document.getElementById('map').style.cursor = '';*/
             	});
-                spinner.stop();
+                /*spinner.stop();*/
+		map.spin(false);
      	   	lastgeojsonLayer = geojsonLayer;
         	lastgeojsonLayer.openPopup();
 	}
