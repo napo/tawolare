@@ -68,7 +68,7 @@ chmod +x setup_catasto.sh
 ./setup_catasto.sh
 git clone https@github.com:napo/tawolare.git
 cd tawolare
-pip install -r requirements.txt
+sudo pip install -r requirements.txt
 python tawolare.py
 ```
 ... apri il tuo browser a http://127.0.0.1:8515
