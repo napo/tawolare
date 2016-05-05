@@ -13,6 +13,15 @@ $(window).resize(function() {
    }   
 });
 
+function getdescriptionKML(data) {
+    message = "";
+    if (data.hasOwnProperty("features")) {
+	for (var i = 0; i < data.features.lenght; i++) {
+    		messagge += getdescription(features[i]);
+	}
+    }
+    return message;
+}
 
 function getdescription(data) {
     message = '<p><h4>comune di ' + data["comune"] + ' - codice ' + data["comu"] + '</h4>';
@@ -93,7 +102,7 @@ function downloadPartKML(ccat,num,format) {
         url: urlapi,
         success: function(data){
             var geodata = jQuery.parseJSON(data);
-            content = getdescription(data)
+            content = getdescriptionKML(geodata)
             titolo = 'particella ' + data["dcat"] + ' comune catastale' + data['codcc'] + ' - ' + data['dcat'] + ' nel comune di ' + data['comune'];
             var kml = tokml(geodata, {
                 name: titolo,
