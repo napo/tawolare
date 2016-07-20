@@ -64,6 +64,8 @@ sudo apt-get install python-software-properties
 sudo add-apt-repository ppa:ubuntugis/ubuntugis-unstable
 sudo apt-get install spatialite spatialite-tools
 apt-get install libpython2.7-dev
+apt-get install python-pysqlite2
+apt-get install libpython2.7-dev
 chmod +x setup_catasto.sh
 ./setup_catasto.sh
 git clone https@github.com:napo/tawolare.git
