@@ -2,7 +2,10 @@
 web api per consultare i dati del catasto fondiaro della Provincia Autonoma di Trento
 
 # demo
-[http://tavolare.labmod.org](http://tavolare.labmod.org/map/)
+nota:
+ necessario accettare il certificato SSL in quanto, quello attuale è scaduto
+ 
+[http://tavolare.labmod.org](https://tavolare.labmod.org/map/)
 ## screenshot
 ![particella catastale](https://github.com/napo/tawolare/blob/master/screenshots/particella_da_clic.png?raw=true)
 ![particella foto aerea](https://github.com/napo/tawolare/blob/master/screenshots/particella_foto_area.png?raw=true)
